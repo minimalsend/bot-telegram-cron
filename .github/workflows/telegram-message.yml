@@ -2,9 +2,9 @@ name: Enviar mensagem para o Telegram
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
-      timezone: 'America/Sao_Paulo'
-  workflow_dispatch: # Permite rodar manualmente também
+    - cron: '15 23 * * *'
+      timezone: 'America/Sao_Paulo'  # Usando o timezone correto
+  workflow_dispatch:  # Permite rodar manualmente também
 
 jobs:
   send-telegram:
@@ -22,15 +22,8 @@ jobs:
       - name: Instalar dependências
         run: pip install requests
 
-      - name: Exibir horário atual (debug)
-        run: |
-          echo "Horário UTC atual:"
-          date -u
-          echo "Horário local de São Paulo (Minas Gerais):"
-          TZ=America/Sao_Paulo date
-
       - name: Rodar o script
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python send_message.py
+        run: python3 ./send_message.py  # Caminho para o script na raiz
