@@ -1,9 +1,10 @@
 name: Enviar mensagem para o Telegram
 
 on:
+ on:
   schedule:
-    - cron: '15 23 * * *' # 23:15 horário local (Brasil)
-      timezone: 'America/Sao_Paulo' # Fuso horário de Minas Gerais
+    - cron: '*/5 * * * *'
+      timezone: 'America/Sao_Paulo'
   workflow_dispatch: # Permite rodar manualmente também
 
 jobs:
