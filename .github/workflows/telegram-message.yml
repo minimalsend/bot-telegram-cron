@@ -1,7 +1,6 @@
 name: Enviar mensagem para o Telegram
 
 on:
- on:
   schedule:
     - cron: '*/5 * * * *'
       timezone: 'America/Sao_Paulo'
