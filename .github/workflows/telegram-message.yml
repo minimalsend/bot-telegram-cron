@@ -2,9 +2,8 @@ name: Enviar mensagem para o Telegram
 
 on:
   schedule:
-    - cron: '15 23 * * *'
-      timezone: 'America/Sao_Paulo'  # Usando o timezone correto
-  workflow_dispatch:  # Permite rodar manualmente também
+    - cron: '*/2 * * * *'  # Executa a cada 2 minutos
+      timezone: 'America/Sao_Paulo'  # Define o fuso horário
 
 jobs:
   send-telegram:
@@ -14,30 +13,8 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Cache
-        uses: actions/cache@v3.4.3
-        with:
-          # Lista de arquivos/diretórios/padrões curinga para armazenar no cache
-          path: |
-            ~/.cache/pip
-            # Adicione outros diretórios ou arquivos que você deseja armazenar em cache, como o diretório de dependências.
-          # Chave para o cache (dependendo da configuração, isso pode ser alterado)
-          key: ${{ runner.os }}-python-${{ hashFiles('**/requirements.txt') }}
-          # Caso o cache não seja encontrado, ele tenta usar as chaves de fallback
-          restore-keys: |
-            ${{ runner.os }}-python-
-            # Pode adicionar outras chaves se necessário, por exemplo, para diferentes versões de Python.
-        
-      - name: Configurar Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Instalar dependências
-        run: pip install -r requirements.txt  # Supondo que você tenha um arquivo de requisitos
-
       - name: Rodar o script
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python3 ./send_message.py  # Caminho correto para o script
+        run: python3 ./send_message.py  # Executa o script Python
