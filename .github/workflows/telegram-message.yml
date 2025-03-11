@@ -2,7 +2,7 @@ name: Enviar mensagem para o Telegram
 
 on:
   schedule:
-    - cron: '0 13 * * *' # Horário UTC! Exemplo: 13:00 UTC todo dia (10:00 no Brasil com -3h)
+  - cron: '0 2 * * *' # 02:00 UTC ➜ 23:00 no Brasil
   workflow_dispatch: # Permite rodar manualmente também
 
 jobs:
